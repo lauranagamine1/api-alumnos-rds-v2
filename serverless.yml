@@ -1,0 +1,26 @@
+org: lauranagamine
+service: api-alumnos-rds-v2
+
+provider:
+  name: aws
+  runtime: python3.13
+  memorySize: 1024
+  timeout: 20
+  iam:
+    role: arn:aws:iam::004571481520:role/LabRole
+  environment:
+    DB_SECRET_ARN: ${sls:stage}/alumnos
+    DB_NAME: ${sls:stage}
+
+functions:
+  listar:
+    handler: ListarAlumnos.lambda_handler
+    package:
+      include:
+        - ./**
+    events:
+      - http:
+          path: /alumnos/listar
+          method: get
+          cors: true
+          integration: lambda
