@@ -10,7 +10,7 @@ provider:
     role: arn:aws:iam::004571481520:role/LabRole
   environment:
     DB_SECRET_ARN: arn:aws:secretsmanager:us-east-1:004571481520:secret:dev/alumnos-F6OcIw
-    DB_NAME: alumnos_dev
+    DB_NAME: alumnos
 
 functions:
   listar:
