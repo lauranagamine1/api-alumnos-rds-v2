@@ -1,6 +1,13 @@
 org: lauranagamine
 service: api-alumnos-rds-v2
 
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+
 provider:
   name: aws
   runtime: python3.13
@@ -9,8 +16,8 @@ provider:
   iam:
     role: arn:aws:iam::004571481520:role/LabRole
   environment:
-    DB_SECRET_ARN: ${sls:stage}/alumnos
-    DB_NAME: ${sls:stage}
+    DB_SECRET_ARN: arn:aws:secretsmanager:us-east-1:004571481520:secret:dev/alumnos-XXXXXXXX   # ← reemplaza con el ARN real
+    DB_NAME: alumnos_dev
 
 functions:
   listar:
